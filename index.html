@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#59649b" />
+    <meta name="description" content="기본·800·900 단어장을 골라 학습하는 개인용 TOEIC 단어장" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2359649b'/%3E%3Cpath d='M8 9h16v3H18v12h-4V12H8z' fill='%23bcdccf'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>TOEIC Flip · 단어장 선택</title>
+  </head>
+  <body class="library-page">
+    <header class="topbar">
+      <a class="brand" href="index.html">TOEIC <span>FLIP</span></a>
+      <p>단어장 선택</p>
+    </header>
+
+    <main class="library" aria-labelledby="libraryTitle">
+      <section class="library-intro">
+        <span class="eyebrow">MY WORD BOOKS</span>
+        <h1 id="libraryTitle">오늘 외울 단어장을 골라주세요</h1>
+        <p>단어장마다 Day 선택과 복습함 기록이 따로 저장됩니다.</p>
+      </section>
+
+      <section class="book-grid" aria-label="단어장 목록">
+        <a class="book-card book-basic" href="study.html?book=basic">
+          <span class="book-number">01</span>
+          <span class="book-status">기존 단어장</span>
+          <strong>기본 단어</strong>
+          <small>1,222개 · Day 1–30</small>
+          <span class="book-open">학습하기 <b aria-hidden="true">→</b></span>
+        </a>
+
+        <a class="book-card book-800" href="study.html?book=800" target="_blank" rel="noopener" aria-label="800 단어 학습하기, 새 창에서 열림">
+          <span class="book-number">02</span>
+          <span class="book-status">새 창</span>
+          <strong>800 단어</strong>
+          <small>2,033개 · Day 1–30</small>
+          <span class="book-open">학습하기 <b aria-hidden="true">↗</b></span>
+        </a>
+
+        <a class="book-card book-900" href="study.html?book=900" target="_blank" rel="noopener" aria-label="900 단어 학습하기, 새 창에서 열림">
+          <span class="book-number">03</span>
+          <span class="book-status">새 창</span>
+          <strong>900 단어</strong>
+          <small>954개 · Day 1–30</small>
+          <span class="book-open">학습하기 <b aria-hidden="true">↗</b></span>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>

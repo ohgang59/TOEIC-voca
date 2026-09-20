@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#59649b" />
+    <meta name="description" content="Day를 골라 섞어 외우는 개인용 토익 단어장" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2359649b'/%3E%3Cpath d='M8 9h16v3H18v12h-4V12H8z' fill='%23bcdccf'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>TOEIC Flip</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html">TOEIC <span>FLIP</span></a>
+      <div class="topbar-actions">
+        <span id="bookName" class="book-tag">단어장</span>
+        <a class="book-switch" href="index.html">단어장 바꾸기</a>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel setup-panel" aria-label="학습 설정">
+        <div class="panel-title">
+          <span class="step">01</span>
+          <div><strong>오늘의 범위</strong><small>여러 Day를 함께 선택할 수 있어요</small></div>
+        </div>
+        <div class="quick-actions">
+          <button id="selectAll" class="text-button" type="button">전체 선택</button>
+          <button id="clearDays" class="text-button" type="button">선택 해제</button>
+        </div>
+        <div id="dayGrid" class="day-grid" aria-label="Day 선택"></div>
+        <p id="selectionSummary" class="selection-summary">단어를 불러오는 중이에요</p>
+
+        <fieldset class="mode-field">
+          <legend>카드 앞면</legend>
+          <label><input type="radio" name="mode" value="en" checked /> 영어 <span>→ 한국어</span></label>
+          <label><input type="radio" name="mode" value="ko" /> 한국어 <span>→ 영어</span></label>
+        </fieldset>
+        <button id="startButton" class="primary-button" type="button" disabled>선택한 Day로 시작</button>
+      </aside>
+
+      <section class="study-column" aria-label="단어 학습">
+        <div class="session-head">
+          <div><span id="sessionLabel">LOADING</span><strong id="progressText">0 / 0</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+        </div>
+
+        <button id="flashcard" class="flashcard" type="button" aria-label="카드 뒤집기" disabled>
+          <span id="cardDay" class="card-day">TOEIC FLIP</span>
+          <span id="cardCue" class="card-cue">단어 데이터를 준비하고 있어요</span>
+          <strong id="cardText">Loading</strong>
+          <span class="flip-hint"><kbd>Space</kbd> 눌러 카드 뒤집기</span>
+        </button>
+
+        <div class="sound-row">
+          <button id="soundButton" class="sound-button" type="button" aria-label="영어 발음 듣기"><span aria-hidden="true">◖))</span> 영어 발음 듣기</button>
+        </div>
+
+        <div id="answerActions" class="answer-actions" hidden>
+          <button id="againButton" class="again-button" type="button"><span>다시</span> 아직 헷갈려요</button>
+          <button id="knownButton" class="known-button" type="button"><span>외움</span> 기억했어요</button>
+        </div>
+      </section>
+
+      <aside class="panel progress-panel" aria-label="학습 현황">
+        <div class="panel-title">
+          <span class="step">02</span>
+          <div><strong>학습 현황</strong><small id="bookMeta">기록은 이 단어장에 따로 저장돼요</small></div>
+        </div>
+        <div class="stat-block"><span>이번 세션 완료</span><strong id="doneCount">0</strong></div>
+        <div class="stat-block accent"><span>다시 볼 단어</span><strong id="reviewCount">0</strong></div>
+        <button id="reviewButton" class="review-button" type="button" disabled>복습함 학습하기 <span>→</span></button>
+        <button id="reviewListButton" class="review-list-button" type="button" disabled>다시 볼 단어 목록 <span>목록</span></button>
+        <div class="tip"><strong>키보드로 빠르게</strong><p><kbd>Space</kbd> 뒤집기 · <kbd>A</kbd> 다시 · <kbd>K</kbd> 외움 · <kbd>P</kbd> 발음</p></div>
+      </aside>
+    </main>
+
+    <dialog id="reviewDialog" class="review-dialog" aria-labelledby="reviewDialogTitle">
+      <div class="review-dialog-shell">
+        <header class="review-dialog-head">
+          <div>
+            <span>REVIEW BOX</span>
+            <h2 id="reviewDialogTitle">다시 볼 단어 목록</h2>
+            <p id="reviewDialogSummary">0개의 단어가 있어요</p>
+          </div>
+          <button id="closeReviewDialog" class="dialog-close" type="button" aria-label="목록 닫기">×</button>
+        </header>
+        <div id="reviewTableWrap" class="review-table-wrap">
+          <table class="review-table">
+            <thead>
+              <tr><th>Day</th><th>영어 단어</th><th>한국어 뜻</th></tr>
+            </thead>
+            <tbody id="reviewListBody"></tbody>
+          </table>
+        </div>
+        <p id="reviewEmpty" class="review-empty" hidden>아직 다시 볼 단어가 없어요.</p>
+        <footer class="review-dialog-foot">
+          <button id="closeReviewDialogBottom" class="primary-button" type="button">목록 닫기</button>
+        </footer>
+      </div>
+    </dialog>
+
+    <p id="liveRegion" class="sr-only" aria-live="polite"></p>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="catalog.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
